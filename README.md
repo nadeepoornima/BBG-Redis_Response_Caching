@@ -1,6 +1,6 @@
 # Redis Response Caching
 
-This is a sample multi client server program. This has implemented by using the **ExecutorService** in java. As a user could able to give the max thread pool size and execute the program.
+Redis is an open source, in-memory data structure store, used as a database, cache and message broker.WSO2 provides a Ballerina package which includes a client to perform operations with a Redis database. 
 
 ## Prerequisites	
 
