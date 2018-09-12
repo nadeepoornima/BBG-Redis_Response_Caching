@@ -86,6 +86,102 @@ Ballerina is a complete programming language that supports custom project struct
 </code>
 </pre>
 
+* Create the above directories in your local machine and also create empty **.bal** files.
+* Then open the terminal and navigate to **redis_response_caching/guide** and run Ballerina project initializing toolkit.
+
+<pre>
+<code>$ ballerina init</code>
+</pre>
+
+### Developing the service
+
+Let’s see how to implement the weather_forcasting_service which the service handles redis response caching. In this service, we need to implement the required logic to check the response from the redis cache database. As per the logic, If the response available in the redis cache then need to get the result from the cache and show the response. If this is the very first call to the backend or the cache invalidate time has passed then the response will not available in the cache. In that situation need to call to the backend and response should give to the client while the response should cache in the redis database. Therefore here we need to use that WSO2 redis cache package to implement this logic and has implemented weather_forcasting_service.bal by using that redis package as follows.
+
+#### The implementation of weather_forcasting_service.bal
+
+<pre>
+<code>
+//importing required packages including the WSO2 redis package
+import ballerina/http;
+import ballerina/io;
+import wso2/redis;
+
+// Backend
+endpoint http:Client backendEndpoint {
+    url: "http://localhost:9095/weatherForcastingBackend"
+};
+//Service Listner
+endpoint http:Listener Servicelistner  {
+    port : 9100
+};
+
+
+// Redis datasource used as an LRU cache
+endpoint redis:Client cache {
+    host: "localhost",
+    password: "",
+    options: { ssl: false }
+};
+
+service<http:Service> weatherForcastService bind Servicelistner {
+
+    getWeatherForcast(endpoint caller, http:Request req) {
+        http:Response res = new;
+
+        // First check whether the response is already cached
+        var cachedResponse = cache->get("key");
+
+        match cachedResponse {
+            // If the response is cached set it as the payload
+            string result => {
+                io:println("Found in cache! " + result);
+                res.setPayload(<json>result);
+            }
+            // If response is not cached, call the backend and get the result and cache it
+            () => {
+                io:println("Not Found in cache Called to Backend and cache the response");
+                var backendResponse = backendEndpoint->get("/getDailyForcast");
+                res = handleBackendResponse(backendResponse);
+            }
+            error => {
+                res.setPayload({ message: "Error occurred" });
+            }
+        }
+
+        // Respond to the client
+        caller->respond(res) but {
+            error e => io:println("Error sending response")
+        };
+    }
+}
+
+function handleBackendResponse(http:Response|error backendResponse) returns http:Response {
+    http:Response res = new;
+    match backendResponse {
+        http:Response backendRes => {
+            res = backendRes;
+            var jsonPayload = res.getJsonPayload();
+            match jsonPayload {
+                json j => {
+                    // Cache the response
+                    _ = cache->setVal("key", j.toString());
+                    // Set an expiry time for the cache
+                    _ = cache->pExpire("key", 600000);
+                }
+                error e => {
+                    io:println("Error while updating the cache" + e.message);
+                }
+            }
+        }
+        error => {
+            res.setPayload({ message: "Error occurred" });
+        }
+    }
+    return res;
+}
+</code>
+</pre>
+
 
 
 
