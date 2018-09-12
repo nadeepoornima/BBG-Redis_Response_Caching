@@ -20,7 +20,7 @@ The following are the sections available in this guide.
 
 1. <a href="https://github.com/nadeepoornima/BBG-Redis_Response_Caching#what-youll-build">WHAT YOU’LL BUILD</a>
 2. <a href="https://github.com/nadeepoornima/BBG-Redis_Response_Caching#prerequisites">PREREQUISITES</a> 
-3. IMPLEMENTATION
+3. <a href="https://github.com/nadeepoornima/BBG-Redis_Response_Caching#implementation">IMPLEMENTATION</a>
 4. TESTING
 5. DEPLOYMENT
 6. OBSERVABILITY
@@ -72,6 +72,15 @@ If you want to skip the basics, you can download the git repo and directly move 
 ### Create the project structure
 
 Ballerina is a complete programming language that supports custom project structures. Use the following package structure for this guide.
+
+redis_response_caching
+    ├── guide
+       └── response_caching
+           ├── weather_forcasting_service.bal
+            |----- weather_forcasting_backend.bal
+           └── tests
+               └── weather_forcasting_service_test.bal
+
 
 
 
