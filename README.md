@@ -39,12 +39,7 @@ It is showing same behaviour with Ballerina as well and you will understand this
  
 The high level picture of this response caching is as follows.
 
-![alt text](https://github.com/nadeepoornima/BBG-Redis_Response_Caching/images/RedisCachingUsecase.jpg "High level picture")
-
-https://github.com/nadeepoornima/BBG-Redis_Response_Caching/tree/master/images
-
-
-
+![alt text](https://github.com/nadeepoornima/BBG-Redis_Response_Caching/images/BBGUseCaseChanged.png "High level picture")
 
 
 1. First call to the backend
