@@ -18,7 +18,7 @@ Let’s see an example and how we can use this response caching  in real world b
 
 The following are the sections available in this guide.
 
-1. WHAT YOU’LL BUILD
+1. <a href="https://github.com/nadeepoornima/BBG-Redis_Response_Caching#what-youll-build">WHAT YOU’LL BUILD</a>
 2. PREREQUISITES 
 3. IMPLEMENTATION
 4. TESTING
@@ -40,6 +40,7 @@ It is showing same behaviour with Ballerina as well and you will understand this
 The high level picture of this response caching is as follows.
 
 ![alt text](https://github.com/nadeepoornima/BBG-Redis_Response_Caching/blob/master/images/BBGUseCaseChanged.png)
+
 
 
 1. First call to the backend
