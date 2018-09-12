@@ -282,7 +282,7 @@ Now you have completed developing the redis response caching scenario with Balle
 
 ## DEPLOYMENT
 
-### Deploy locally
+### Deploying locally
 
 * As the first step, you can build a Ballerina executable archive (.balx) of the services that we developed above. Navigate to *BBG-Redis_Response_Caching/redis_response_caching/guide/response_caching* and run the following command.
 <pre>
@@ -312,9 +312,17 @@ ballerina: started HTTP/WS endpoint 0.0.0.0:9100
 </code>
 </pre>
 
+### Deploying on Docker
+
+### Deploying on Kubernetes
 
 ## OBSERVABILITY
 
+### Tracing
+
+### Metrics
+
+### Logging
 
 
 
