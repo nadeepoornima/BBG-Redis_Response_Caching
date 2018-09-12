@@ -282,6 +282,37 @@ Now you have completed developing the redis response caching scenario with Balle
 
 ## DEPLOYMENT
 
+### Deploy locally
+
+* As the first step, you can build a Ballerina executable archive (.balx) of the services that we developed above. Navigate to *BBG-Redis_Response_Caching/redis_response_caching/guide/response_caching* and run the following command.
+<pre>
+<code>$ ballerina build</code>
+</pre>
+
+* Once the *weather_forcasting_backend.balx* and *weather_forcasting_service.balx* files are created inside the target folder, you can run them with the following command.
+<pre>
+<code>$ballerina run target/weather_forcasting_backend.balx</code>
+<code>$ballerina run target/weather_forcasting_service.balx</code>
+</pre>
+
+* Successful execution of the service displays the following output.
+<pre>
+<code>$ballerina run target/weather_forcasting_backend.balx</code>
+<code>
+ballerina: initiating service(s) in 'weather_forcasting_backend.bal'
+ballerina: started HTTP/WS endpoint 0.0.0.0:9095
+</code>
+<pre>
+
+<pre>
+<code>$ballerina run target/weather_forcasting_service.balx</code>
+<code>
+ballerina: initiating service(s) in 'weather_forcasting_service.balx'
+ballerina: started HTTP/WS endpoint 0.0.0.0:9100
+</code>
+<pre>
+
+
 ## OBSERVABILITY
 
 
