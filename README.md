@@ -99,8 +99,7 @@ Let’s see how to implement the weather_forcasting_service which the service ha
 
 #### The implementation of weather_forcasting_service.bal
 
-<pre>
-
+```java
 //importing required packages including the WSO2 redis package
 import ballerina/http;
 import ballerina/io;
@@ -180,7 +179,6 @@ function handleBackendResponse(http:Response|error backendResponse) returns http
     return res;
 }
 
-</pre>
 
 
 
