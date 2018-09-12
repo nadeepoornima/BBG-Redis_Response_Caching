@@ -178,6 +178,120 @@ function handleBackendResponse(http:Response|error backendResponse) returns http
     }
     return res;
 }
+```
+
+According to the above implementation, we have used the following line to import the WSO2 redis package to our service.
+```java
+import wso2/redis;
+```
+Then we have created the connection with redis database(redis datasource) by using the below code lines.
+
+```java
+endpoint redis:Client cache {
+    host: "localhost",
+    password: "",
+    options: { ssl: false }
+};
+```
+
+As per the logic, when calling to the backend as the first time or cache has expired, the it called to the backend and the response of the backend will cache by assigning a key and expiry time for that. The expiry time unit is millisecond. As per example, If you set the expiry time as 600000, then it will represents 600000 milliseconds and it will equal to 10 minutes. This logic has implemented in the “handleBackendResponse” function as the below.
+
+```java
+function handleBackendResponse(http:Response|error backendResponse) returns http:Response {
+    http:Response res = new;
+    match backendResponse {
+        http:Response backendRes => {
+            res = backendRes;
+            var jsonPayload = res.getJsonPayload();
+            match jsonPayload {
+                json j => {
+                    // Cache the response
+                    _ = cache->setVal("key", j.toString());
+                    // Set an expiry time for the cache
+                    _ = cache->pExpire("key", 600000);
+                }
+                error e => {
+                    io:println("Error while updating the cache" + e.message);
+                }
+            }
+        }
+        error => {
+            res.setPayload({ message: "Error occurred" });
+        }
+    }
+    return res;
+}
+```
+
+Then when calling to the weather_forcast_service again by another one, if the response already cached then it will get from the cache and show it as the response by executing following code lines with the *getWeatherForcast()* function.
+
+```java
+ var cachedResponse = cache->get("key");
+
+        match cachedResponse {
+            // If the response is cached set it as the payload
+            string result => {
+                io:println("Found in cache! " + result);
+                res.setPayload(<json>result);
+            }
+```
+
+If the response is not found in the cache, then the backend calling is happening by executing the following code lines within the *getWeatherForcast()* function.
+
+```java
+ // If response is not cached, call the backend and get the result and cache it
+            () => {
+                io:println("Not Found in cache Called to Backend and cache the response");
+                var backendResponse = backendEndpoint->get("/getDailyForcast");
+                res = handleBackendResponse(backendResponse);
+            }
+```
+
+Let’s see the backend implementation as well. The backend is weather_forcasting_backend.bal and it has implemented as the below. Please note this is a sample backend only to present the redis caching with ballerina. 
+
+#### The implementation of weather_forcasting_backend.bal
+
+```java
+import ballerina/io;
+import ballerina/http;
+
+endpoint http:Listener listner  {
+    port : 9095
+};
+
+service<http:Service> weatherForcastingBackend  bind listner {
+
+    getDailyForcast(endpoint caller, http:Request req) {
+        http:Response res = new;
+            json response = { "Location":"Sri Lanka",
+                "Status":"Thunderstorm",
+                "Temprature":"29 celcius",
+                "Wind": "18 km/h",
+                "Humidity":"86%",
+                "Precipitation":"80%" };
+            res.setPayload(response);
+
+        caller->respond(res) but { error e => io:println("Error sending response") };
+    }
+}
+```
+
+Now you have completed developing the redis response caching scenario with Ballerina redis caching package.
+
+## TESTING
+
+## DEPLOYMENT
+
+## OBSERVABILITY
+
+
+##### Reference
+[1]. https://redis.io/topics/introduction
+[2]. https://medium.com/@Manuri/redis-caching-example-with-ballerina-16f875f31faf
+[3]. https://www.infoworld.com/article/3063161/nosql/why-redis-beats-memcached-for-caching.html
+
+
+
 
 
 
