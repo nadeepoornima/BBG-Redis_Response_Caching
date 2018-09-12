@@ -19,7 +19,7 @@ Let’s see an example and how we can use this response caching  in real world b
 The following are the sections available in this guide.
 
 1. <a href="https://github.com/nadeepoornima/BBG-Redis_Response_Caching#what-youll-build">WHAT YOU’LL BUILD</a>
-2. PREREQUISITES 
+2. <a href="https://github.com/nadeepoornima/BBG-Redis_Response_Caching#prerequisites">PREREQUISITES</a> 
 3. IMPLEMENTATION
 4. TESTING
 5. DEPLOYMENT
@@ -54,6 +54,24 @@ The high level picture of this response caching is as follows.
 
 ## PREREQUISITES	
 
-1. Install Ballerina 0.980.1.
-2. Install Ballerina Redis package. 
-3. Install Redis database in your machine/any remote server.
+1. <a href="https://ballerina.io/learn/getting-started/">Ballerina Distribution</a>
+2. A Text Editor or an IDE
+3. Install Ballerina Redis package. You can download the package from <a href="https://github.com/wso2-ballerina/package-redis/releases/tag/v0.5.4">GitHub releases</a> of the package. Inside the package zip archive you can find a installer script. It will install the package in seconds.
+4. Install Redis database in your machine/any remote server. <a href="https://redis.io/download">Redis website</a> has simple instructions for installation. They provide a Redis docker image too!
+
+### Optional requirements
+
+1. Ballerina IDE plugins (<a href="https://plugins.jetbrains.com/plugin/9520-ballerina">IntelliJ IDEA</a>, <a href="https://marketplace.visualstudio.com/items?itemName=ballerina.ballerina">VSCode</a>, <a href="https://atom.io/packages/language-ballerina">Atom</a>)
+2. <a href="https://docs.docker.com/install/">Docker</a>
+3. <a href="https://kubernetes.io/docs/setup/">Kubernetes</a>
+
+## IMPLEMENTATION
+
+If you want to skip the basics, you can download the git repo and directly move to the "Testing" section by skipping "Implementation" section.
+
+### Create the project structure
+
+Ballerina is a complete programming language that supports custom project structures. Use the following package structure for this guide.
+
+
+
