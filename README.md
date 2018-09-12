@@ -297,7 +297,7 @@ Now you have completed developing the redis response caching scenario with Balle
 
 * Successful execution of the service displays the following output.
 <pre>
-<code>$ballerina run target/weather_forcasting_backend.balx</code>
+<code>**$ballerina run target/weather_forcasting_backend.balx**</code>
 <code>
 ballerina: initiating service(s) in 'weather_forcasting_backend.bal'
 ballerina: started HTTP/WS endpoint 0.0.0.0:9095
@@ -305,7 +305,7 @@ ballerina: started HTTP/WS endpoint 0.0.0.0:9095
 </pre>
 
 <pre>
-<code>$ballerina run target/weather_forcasting_service.balx</code>
+<code>**$ballerina run target/weather_forcasting_service.balx**</code>
 <code>
 ballerina: initiating service(s) in 'weather_forcasting_service.balx'
 ballerina: started HTTP/WS endpoint 0.0.0.0:9100
