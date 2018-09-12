@@ -73,17 +73,16 @@ If you want to skip the basics, you can download the git repo and directly move 
 
 Ballerina is a complete programming language that supports custom project structures. Use the following package structure for this guide.
 
-<code>"
-└── redis_response_caching
-├── guide
-	├── response_caching
-		├── weather_forcasting_backend.bal
-		└── weather_forcasting_service.bal
-	└── tests
-		├── weather_forcasting_backend_test.bal
-		└── weather_forcasting_service_test.bal
-"
-</code>
+
+<code>└── redis_response_caching</code>
+<code>├── guide</code>
+	<code>├── response_caching</code>
+		<code>├── weather_forcasting_backend.bal</code>
+		<code>└── weather_forcasting_service.bal</code>
+	<code>└── tests</code>
+		<code>├── weather_forcasting_backend_test.bal</code>
+		<code>└── weather_forcasting_service_test.bal</code>
+
 
 
 
