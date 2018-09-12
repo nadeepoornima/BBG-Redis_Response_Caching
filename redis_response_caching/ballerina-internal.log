@@ -11,3 +11,16 @@ org.ballerinalang.util.exceptions.BallerinaException: error : compilation failed
 	at java.util.Optional.ifPresent(Optional.java:159)
 	at org.ballerinalang.launcher.Main.main(Main.java:66)
  
+[2018-09-12 23:12:32,215] ERROR {org.ballerinalang.launcher.Main} - error : compilation failed 
+org.ballerinalang.util.exceptions.BallerinaException: error : compilation failed
+	at org.ballerinalang.testerina.core.BTestRunner.lambda$compileAndBuildSuites$7(BTestRunner.java:175)
+	at java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:580)
+	at org.ballerinalang.testerina.core.BTestRunner.compileAndBuildSuites(BTestRunner.java:155)
+	at org.ballerinalang.testerina.core.BTestRunner.runTest(BTestRunner.java:97)
+	at org.ballerinalang.testerina.core.BTestRunner.runTest(BTestRunner.java:82)
+	at org.ballerinalang.testerina.core.BTestRunner.runTest(BTestRunner.java:71)
+	at org.ballerinalang.testerina.core.TestCmd.execute(TestCmd.java:160)
+	at java.util.Optional.ifPresent(Optional.java:159)
+	at org.ballerinalang.launcher.Main.main(Main.java:66)
+ 
