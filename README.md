@@ -1,6 +1,6 @@
 # Redis Caching - Response Caching
 
-Redis is an open source, in-memory data structure store, used as a database, cache and message broker. This supports data structures such as strings, hash lists, sets, sorted sets with range queries, bitmaps, hyperlogs  and geospatial indexes with radius queries[1]. 
+Redis is an open source, in-memory data structure store, used as a database, cache and message broker. This supports data structures such as strings, hash lists, sets, sorted sets with range queries, bitmaps, hyperlogs  and geospatial indexes with radius queries. 
 
 WSO2 provides a Ballerina package which includes a client to perform operations with a Redis database. 
 
@@ -21,9 +21,9 @@ The following are the sections available in this guide.
 1. <a href="https://github.com/nadeepoornima/BBG-Redis_Response_Caching#what-youll-build">WHAT YOU’LL BUILD</a>
 2. <a href="https://github.com/nadeepoornima/BBG-Redis_Response_Caching#prerequisites">PREREQUISITES</a> 
 3. <a href="https://github.com/nadeepoornima/BBG-Redis_Response_Caching#implementation">IMPLEMENTATION</a>
-4. TESTING
-5. DEPLOYMENT
-6. OBSERVABILITY
+4. <a href="https://github.com/nadeepoornima/BBG-Redis_Response_Caching/blob/master/README.md#testing">TESTING</a>
+5. <a href="https://github.com/nadeepoornima/BBG-Redis_Response_Caching/blob/master/README.md#deployment">DEPLOYMENT</a>
+6. <a href="https://github.com/nadeepoornima/BBG-Redis_Response_Caching/blob/master/README.md#observability">OBSERVABILITY</a>
 
 ## WHAT YOU’LL BUILD
 
@@ -285,10 +285,6 @@ Now you have completed developing the redis response caching scenario with Balle
 ## OBSERVABILITY
 
 
-##### Reference
-[1]. https://redis.io/topics/introduction
-[2]. https://medium.com/@Manuri/redis-caching-example-with-ballerina-16f875f31faf
-[3]. https://www.infoworld.com/article/3063161/nosql/why-redis-beats-memcached-for-caching.html
 
 
 
