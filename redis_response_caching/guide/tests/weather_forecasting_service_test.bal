@@ -7,7 +7,7 @@ endpoint http:Client clientEPofweatherService { url: "http://localhost:9100" };
 @test:Config {}
 function testgetWeatherForecast() {
     // Send 'GET' request and obtain the response.
-    http:Response response = check clientEPofweatherService -> get("/weatherForecastService/getWeatherForcast");
+    http:Response response = check clientEPofweatherService -> get("/weatherForecastService/getWeatherForecast");
     // Expected response code is 200.
     test:assertEquals(response.statusCode, 200,
         msg = "getDailyForcast resource did not respond with expected response code!");
