@@ -280,6 +280,35 @@ Now you have completed developing the redis response caching scenario with Balle
 
 ## TESTING
 
+### Invoking the services
+
+1. **Testing the backend service**
+
+To test the back end service, you need to go to the *BBG-Redis_Response_Caching/redis_response_caching/guide/response_caching* and run the *weather_forcasting_backend.bal* by executing the following command. 
+<pre>
+<code>$ ballerina run weather_forcasting_backend.bal</code>
+</pre>
+If correctly up the backend service, it will show the following message on the terminal.
+<pre>
+<code>
+ballerina: initiating service(s) in 'weather_forcasting_backend.bal'
+ballerina: started HTTP/WS endpoint 0.0.0.0:9095
+</code>
+</pre>
+Now you can invoke the backend by sending the request as the below:
+<pre>
+<code>curl -v http://localhost:9095/weatherForcastingBackend/getDailyForcast</code>
+</pre>
+The expected response for the above request is,
+<pre>
+<code>
+{"Location":"Sri Lanka","Status":"Thunderstorm","Temperature":"29 celcius","Wind":"18 km/h","Humidity":"86%","Precipitation":"80%"} 
+</code>
+</pre>
+
+2. **Testing the weather forecasting service** 
+	
+
 ## DEPLOYMENT
 
 ### Deploying locally

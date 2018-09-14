@@ -11,7 +11,7 @@ service<http:Service> weatherForcastingBackend  bind listner {
         http:Response res = new;
             json response = { "Location":"Sri Lanka",
                 "Status":"Thunderstorm",
-                "Temprature":"29 celcius",
+                "Temperature":"29 celcius",
                 "Wind": "18 km/h",
                 "Humidity":"86%",
                 "Precipitation":"80%" };

@@ -13,7 +13,7 @@ function testgetWeatherForcast() {
         msg = "getDailyForcast resource did not respond with expected response code!");
     // Check whether the response is as expected.
     json resPayload = check response.getJsonPayload();
-    test:assertEquals(resPayload.toString(), "{\"Location\":\"Sri Lanka\",\"Status\":\"Thunderstorm\",\"Temprature\":\"29 celcius\",\"Wind\":\"18 km/h\",\"Humidity\":\"86%\",\"Precipitation\":\"80%\"}",
+    test:assertEquals(resPayload.toString(), "{\"Location\":\"Sri Lanka\",\"Status\":\"Thunderstorm\",\"Temperature\":\"29 celcius\",\"Wind\":\"18 km/h\",\"Humidity\":\"86%\",\"Precipitation\":\"80%\"}",
         msg = "Response Mismatch");
 
 }
