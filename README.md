@@ -307,6 +307,44 @@ The expected response for the above request is,
 </pre>
 
 2. **Testing the weather forecasting service** 
+
+To test this service, the backend service must be in up and running status. Then you need to run the weather forecasting service as well. For that you need to go to the *BBG-Redis_Response_Caching/redis_response_caching/guide/response_caching* and run the *weather_forecasting_service.bal* by executing the following command.
+
+<pre>
+<code>$ ballerina run weather_forecasting_service.bal</code>
+</pre>
+
+If correctly up the weather forecasting service, it will show the following message on the terminal.
+<pre>
+<code>
+ballerina: initiating service(s) in 'weather_forecasting_service.bal'
+ballerina: started HTTP/WS endpoint 0.0.0.0:9100
+</code>
+</pre>
+
+Now you can invoke the weather forecasting service by sending the request as the below:
+<pre>
+<code>curl -v http://localhost:9100/weatherForecastService/getWeatherForecast</code>
+</pre>
+
+Then the expected responses are,
+
+- If the first time invoke this service : 
+
+**Server**: Not Found in cache Called to Backend and cache the response
+**Client**: {"Location":"Sri Lanka","Status":"Thunderstorm","Temperature":"29 celcius","Wind":"18 km/h","Humidity":"86%","Precipitation":"80%"}
+
+- If the second time invoke this service before the cache invalid (eg: as per the implementation cache will invalidate within 10 minutes after caching response in redis database :
+
+**Server**: Found in cache! {"Location":"Sri Lanka","Status":"Thunderstorm","Temperature":"29 celcius","Wind":"18 km/h","Humidity":"86%","Precipitation":"80%"}
+**Client**: {"Location":"Sri Lanka","Status":"Thunderstorm","Temperature":"29 celcius","Wind":"18 km/h","Humidity":"86%","Precipitation":"80%"}
+
+- When expiring the cache :
+
+**Server**: Not Found in cache Called to Backend and cache the response
+**Client**:  {"Location":"Sri Lanka","Status":"Thunderstorm","Temperature":"29 celcius","Wind":"18 km/h","Humidity":"86%","Precipitation":"80%"}
+
+### Writing unit tests
 	
 
 ## DEPLOYMENT
