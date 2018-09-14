@@ -2,12 +2,12 @@ import ballerina/http;
 import ballerina/test;
 
 // Invoking the main function
-endpoint http:Client clientEPofweatherService { url: "http://localhost:9100" };
+endpoint http:Client clientEP { url: "http://localhost:9095" };
 
 @test:Config {}
-function testgetWeatherForcast() {
+function testgetDailyForecast() {
     // Send 'GET' request and obtain the response.
-    http:Response response = check clientEPofweatherService -> get("/weatherForcastService/getWeatherForcast");
+    http:Response response = check clientEP -> get("/weatherForecastingBackend/getDailyForcast");
     // Expected response code is 200.
     test:assertEquals(response.statusCode, 200,
         msg = "getDailyForcast resource did not respond with expected response code!");
@@ -17,4 +17,3 @@ function testgetWeatherForcast() {
         msg = "Response Mismatch");
 
 }
-

@@ -5,7 +5,7 @@ endpoint http:Listener listner  {
     port : 9095
 };
 
-service<http:Service> weatherForcastingBackend  bind listner {
+service<http:Service> weatherForecastingBackend  bind listner {
 
     getDailyForcast(endpoint caller, http:Request req) {
         http:Response res = new;

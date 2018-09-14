@@ -4,7 +4,7 @@ import wso2/redis;
 
 // Backend
 endpoint http:Client backendEndpoint {
-    url: "http://localhost:9095/weatherForcastingBackend"
+    url: "http://localhost:9095/weatherForecastingBackend"
 };
 //Service Listner
 endpoint http:Listener Servicelistner  {
@@ -19,9 +19,9 @@ endpoint redis:Client cache {
     options: { ssl: false }
 };
 
-service<http:Service> weatherForcastService bind Servicelistner {
+service<http:Service> weatherForecastService bind Servicelistner {
 
-    getWeatherForcast(endpoint caller, http:Request req) {
+    getWeatherForecast(endpoint caller, http:Request req) {
         http:Response res = new;
 
         // First check whether the response is already cached
@@ -38,6 +38,7 @@ service<http:Service> weatherForcastService bind Servicelistner {
                 io:println("Not Found in cache Called to Backend and cache the response");
                 var backendResponse = backendEndpoint->get("/getDailyForcast");
                 res = handleBackendResponse(backendResponse);
+
             }
             error => {
                 res.setPayload({ message: "Error occurred" });
