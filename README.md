@@ -399,6 +399,8 @@ ballerina: started HTTP/WS endpoint 0.0.0.0:9100
 
 ### Deploying on Docker
 
+You can run the service that we developed above as a Docker container. As Ballerina platform includes <a href="https://github.com/ballerinax/docker">Ballerina_Docker_Extension</a>, which offers native support for running Ballerina programs on containers, you just need to put the corresponding docker annotations on your service code. Since this guide requires Redis as a prerequisite and you can download the Redis docker image from <a href="https://hub.docker.com/_/redis/">here<a> and please follow guidlines and you can use it to deploy this project as a docker image.
+
 ### Deploying on Kubernetes
 
 ## OBSERVABILITY
