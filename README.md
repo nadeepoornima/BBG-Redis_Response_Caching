@@ -78,11 +78,11 @@ Ballerina is a complete programming language that supports custom project struct
 └── redis_response_caching
 ├── guide
 	├── response_caching
-		├── weather_forcasting_backend.bal
-		└── weather_forcasting_service.bal
+		├── weather_forecasting_backend.bal
+		└── weather_forecasting_service.bal
 	└── tests
-		├── weather_forcasting_backend_test.bal
-		└── weather_forcasting_service_test.bal
+		├── weather_forecasting_backend_test.bal
+		└── weather_forecasting_service_test.bal
 </code>
 </pre>
 
@@ -95,9 +95,9 @@ Ballerina is a complete programming language that supports custom project struct
 
 ### Developing the service
 
-Let’s see how to implement the weather_forcasting_service which the service handles redis response caching. In this service, we need to implement the required logic to check the response from the redis cache database. As per the logic, If the response available in the redis cache then need to get the result from the cache and show the response. If this is the very first call to the backend or the cache invalidate time has passed then the response will not available in the cache. In that situation need to call to the backend and response should give to the client while the response should cache in the redis database. Therefore here we need to use that WSO2 redis cache package to implement this logic and has implemented weather_forcasting_service.bal by using that redis package as follows.
+Let’s see how to implement the weather_forecasting_service which the service handles redis response caching. In this service, we need to implement the required logic to check the response from the redis cache database. As per the logic, If the response available in the redis cache then need to get the result from the cache and show the response. If this is the very first call to the backend or the cache invalidate time has passed then the response will not available in the cache. In that situation need to call to the backend and response should give to the client while the response should cache in the redis database. Therefore here we need to use that WSO2 redis cache package to implement this logic and has implemented weather_forecasting_service.bal by using that redis package as follows.
 
-#### The implementation of weather_forcasting_service.bal
+#### The implementation of weather_forecasting_service.bal
 
 ```java
 //importing required packages including the WSO2 redis package
@@ -107,7 +107,7 @@ import wso2/redis;
 
 // Backend
 endpoint http:Client backendEndpoint {
-    url: "http://localhost:9095/weatherForcastingBackend"
+    url: "http://localhost:9095/weatherForecastingBackend"
 };
 //Service Listner
 endpoint http:Listener Servicelistner  {
@@ -247,9 +247,9 @@ If the response is not found in the cache, then the backend calling is happening
             }
 ```
 
-Let’s see the backend implementation as well. The backend is weather_forcasting_backend.bal and it has implemented as the below. Please note this is a sample backend only to present the redis caching with ballerina. 
+Let’s see the backend implementation as well. The backend is weather_forecasting_backend.bal and it has implemented as the below. Please note this is a sample backend only to present the redis caching with ballerina. 
 
-#### The implementation of weather_forcasting_backend.bal
+#### The implementation of weather_forecasting_backend.bal
 
 ```java
 import ballerina/io;
@@ -259,7 +259,7 @@ endpoint http:Listener listner  {
     port : 9095
 };
 
-service<http:Service> weatherForcastingBackend  bind listner {
+service<http:Service> weatherForecastingBackend  bind listner {
 
     getDailyForcast(endpoint caller, http:Request req) {
         http:Response res = new;
@@ -284,20 +284,20 @@ Now you have completed developing the redis response caching scenario with Balle
 
 1. **Testing the backend service**
 
-To test the back end service, you need to go to the *BBG-Redis_Response_Caching/redis_response_caching/guide/response_caching* and run the *weather_forcasting_backend.bal* by executing the following command. 
+To test the back end service, you need to go to the *BBG-Redis_Response_Caching/redis_response_caching/guide/response_caching* and run the *weather_forecasting_backend.bal* by executing the following command. 
 <pre>
-<code>$ ballerina run weather_forcasting_backend.bal</code>
+<code>$ ballerina run weather_forecasting_backend.bal</code>
 </pre>
 If correctly up the backend service, it will show the following message on the terminal.
 <pre>
 <code>
-ballerina: initiating service(s) in 'weather_forcasting_backend.bal'
+ballerina: initiating service(s) in 'weather_forecasting_backend.bal'
 ballerina: started HTTP/WS endpoint 0.0.0.0:9095
 </code>
 </pre>
 Now you can invoke the backend by sending the request as the below:
 <pre>
-<code>curl -v http://localhost:9095/weatherForcastingBackend/getDailyForcast</code>
+<code>curl -v http://localhost:9095/weatherForecastingBackend/getDailyForcast</code>
 </pre>
 The expected response for the above request is,
 <pre>
@@ -318,25 +318,25 @@ The expected response for the above request is,
 <code>$ ballerina build</code>
 </pre>
 
-* Once the *weather_forcasting_backend.balx* and *weather_forcasting_service.balx* files are created inside the target folder, you can run them with the following command.
+* Once the *weather_forecasting_backend.balx* and *weather_forecasting_service.balx* files are created inside the target folder, you can run them with the following command.
 <pre>
-<code>$ballerina run target/weather_forcasting_backend.balx</code>
-<code>$ballerina run target/weather_forcasting_service.balx</code>
+<code>$ballerina run target/weather_forecasting_backend.balx</code>
+<code>$ballerina run target/weather_forecasting_service.balx</code>
 </pre>
 
 * Successful execution of the service displays the following output.
 <pre>
-<code>$ballerina run target/weather_forcasting_backend.balx</code>
+<code>$ballerina run target/weather_forecasting_backend.balx</code>
 <code>
-ballerina: initiating service(s) in 'weather_forcasting_backend.bal'
+ballerina: initiating service(s) in 'weather_forecasting_backend.bal'
 ballerina: started HTTP/WS endpoint 0.0.0.0:9095
 </code>
 </pre>
 
 <pre>
-<code>$ballerina run target/weather_forcasting_service.balx</code>
+<code>$ballerina run target/weather_forecasting_service.balx</code>
 <code>
-ballerina: initiating service(s) in 'weather_forcasting_service.balx'
+ballerina: initiating service(s) in 'weather_forecasting_service.balx'
 ballerina: started HTTP/WS endpoint 0.0.0.0:9100
 </code>
 </pre>
