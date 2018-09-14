@@ -1,33 +1,20 @@
-//import ballerina/io;
-//import ballerina/http;
-//import ballerina/test;
-//import ballerina/log;
-//
-//endpoint http:Client httpClientOne {
-//    url: "http://localhost:9100"
-//};
-//
-//// Before Suite Function is used to start the services
-//@test:BeforeSuite
-//function beforeSuiteFunc() {
-//    boolean status = test:startServices(".");
-//    log:printInfo("Starting Weather forcasting Services...");
-//}
-//
-//// Test function
-//@test:Config
-//function testStartService() {
-//    log:printInfo("testStartSyncData Service");
-//
-//    http:Request httpRequest = new;
-//    var out = httpClientOne->post("/getWeatherForcast", request = httpRequest);
-//    match out {
-//        http:Response resp => {
-//            log:printInfo("Response received from 'startService' successfully!");
-//        }
-//        error e => {
-//            log:printError("Error occured! " + e.message);
-//            test:assertFail(msg = e.message);
-//        }
-//    }
-//}
+import ballerina/http;
+import ballerina/test;
+
+// Invoking the main function
+endpoint http:Client clientEPofweatherService { url: "http://localhost:9100" };
+
+@test:Config {}
+function testgetWeatherForcast() {
+    // Send 'GET' request and obtain the response.
+    http:Response response = check clientEPofweatherService -> get("/weatherForcastService/getWeatherForcast");
+    // Expected response code is 200.
+    test:assertEquals(response.statusCode, 200,
+        msg = "getDailyForcast resource did not respond with expected response code!");
+    // Check whether the response is as expected.
+    json resPayload = check response.getJsonPayload();
+    test:assertEquals(resPayload.toString(), "{\"Location\":\"Sri Lanka\",\"Status\":\"Thunderstorm\",\"Temprature\":\"29 celcius\",\"Wind\":\"18 km/h\",\"Humidity\":\"86%\",\"Precipitation\":\"80%\"}",
+        msg = "Response Mismatch");
+
+}
+

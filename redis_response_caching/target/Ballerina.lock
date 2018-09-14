@@ -1,0 +1,15 @@
+[project]
+name = ""
+version = ""
+lockfileversion = "1"
+ballerinaversion = "0.980.1"
+packages = [ "guide" ]
+
+[[package]] 
+name = "guide"
+imports = [{org="wso2", name="redis",version="0.0.0"}]
+
+[[package]] 
+org = "wso2"
+name = "redis"
+
