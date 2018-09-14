@@ -360,6 +360,11 @@ This guide contains unit test cases for redis caching service and backend servic
 1. <a href="https://github.com/nadeepoornima/BBG-Redis_Response_Caching/blob/master/redis_response_caching/guide/tests/weather_forecasting_service_test.bal">Weather forecasting test file</a>
 2. <a href="https://github.com/nadeepoornima/BBG-Redis_Response_Caching/blob/master/redis_response_caching/guide/tests/weather_forecasting_backend_test.bal">Backend service test file</a> 
 
+To run the unit tests, navigate to BBG-Redis_Response_Caching/redis_response_caching and run the following command.
+<pre>
+<code>$ ballerina test</code>
+</pre>
+
 ## DEPLOYMENT
 
 ### Deploying locally
