@@ -345,7 +345,20 @@ Then the expected responses are,
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Client**:  {"Location":"Sri Lanka","Status":"Thunderstorm","Temperature":"29 celcius","Wind":"18 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;km/h","Humidity":"86%","Precipitation":"80%"}
 
 ### Writing unit tests
-	
+
+In Ballerina, the unit test cases should be in the same package inside a folder named as 'tests'. When writing the test functions, the below convention should be followed.
+
+Test functions should be annotated with @test:Config. See the below example.
+
+```java
+@test:Config
+   function testFunc() {
+   }
+```
+
+This guide contains unit test cases for redis caching service and backend service in the following files.
+1. <a href="https://github.com/nadeepoornima/BBG-Redis_Response_Caching/blob/master/redis_response_caching/guide/tests/weather_forecasting_service_test.bal">Weather forecasting test file</a>
+2. <a href="https://github.com/nadeepoornima/BBG-Redis_Response_Caching/blob/master/redis_response_caching/guide/tests/weather_forecasting_backend_test.bal">Backend service test file</a> 
 
 ## DEPLOYMENT
 

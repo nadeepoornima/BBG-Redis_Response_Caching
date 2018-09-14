@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15e81439-8776-4447-badc-42094ed836a9" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/redis_response_caching/guide/tests/weather_forecasting_service_test.bal" beforeDir="false" afterPath="$PROJECT_DIR$/redis_response_caching/guide/tests/weather_forecasting_service_test.bal" afterDir="false" />
-    </list>
+    <list default="true" id="15e81439-8776-4447-badc-42094ed836a9" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
