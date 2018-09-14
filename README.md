@@ -331,18 +331,18 @@ Then the expected responses are,
 
 - **If the first time invoke this service** : 
 
-**Server**: Not Found in cache Called to Backend and cache the response<br />
-**Client**: {"Location":"Sri Lanka","Status":"Thunderstorm","Temperature":"29 celcius","Wind":"18 km/h","Humidity":"86%","Precipitation":"80%"}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Server**: Not Found in cache Called to Backend and cache the response<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Client**: {"Location":"Sri Lanka","Status":"Thunderstorm","Temperature":"29 celcius","Wind":"18 km/h","Humidity":"86%","Precipitation":"80%"}
 
 - **If the second time invoke this service before the cache invalid (eg: as per the implementation cache will invalidate within 10 minutes after caching the response in redis database)** :
 
-**Server**: Found in cache! {"Location":"Sri Lanka","Status":"Thunderstorm","Temperature":"29 celcius","Wind":"18 km/h","Humidity":"86%","Precipitation":"80%"}<br />
-**Client**: {"Location":"Sri Lanka","Status":"Thunderstorm","Temperature":"29 celcius","Wind":"18 km/h","Humidity":"86%","Precipitation":"80%"}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Server**: Found in cache! {"Location":"Sri Lanka","Status":"Thunderstorm","Temperature":"29 celcius","Wind":"18 km/h","Humidity":"86%","Precipitation":"80%"}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Client**: {"Location":"Sri Lanka","Status":"Thunderstorm","Temperature":"29 celcius","Wind":"18 km/h","Humidity":"86%","Precipitation":"80%"}
 
 - **When expiring the cache** :
 
-**Server**: Not Found in cache Called to Backend and cache the response<br />
-**Client**:  {"Location":"Sri Lanka","Status":"Thunderstorm","Temperature":"29 celcius","Wind":"18 km/h","Humidity":"86%","Precipitation":"80%"}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Server**: Not Found in cache Called to Backend and cache the response<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Client**:  {"Location":"Sri Lanka","Status":"Thunderstorm","Temperature":"29 celcius","Wind":"18 km/h","Humidity":"86%","Precipitation":"80%"}
 
 ### Writing unit tests
 	
