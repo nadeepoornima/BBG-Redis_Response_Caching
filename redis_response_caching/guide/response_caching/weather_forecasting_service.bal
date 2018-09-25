@@ -4,12 +4,10 @@ import wso2/redis;
 import ballerinax/docker;
 
 // Backend
-@docker:Expose{}
 endpoint http:Client backendEndpoint {
     url: "http://localhost:9095/weatherForecastingBackend"
 };
 //Service Listner
-@docker:Expose{}
 endpoint http:Listener Servicelistner  {
     port : 9100
 };

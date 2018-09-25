@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="15e81439-8776-4447-badc-42094ed836a9" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_backend.bal" beforeDir="false" afterPath="$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_backend.bal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_service.bal" beforeDir="false" afterPath="$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_service.bal" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -34,8 +35,8 @@
       <file leaf-file-name="weather_forecasting_backend.bal" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_backend.bal">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="16" selection-start-line="4" selection-end-line="4" selection-end-column="16" />
+            <state relative-caret-position="330">
+              <caret line="22" column="1" lean-forward="true" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -48,8 +49,8 @@
       <file leaf-file-name="weather_forecasting_service.bal" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_service.bal">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="16" column="17" selection-start-line="16" selection-end-line="16" selection-end-column="17" />
+            <state relative-caret-position="-13">
+              <caret line="19" column="55" lean-forward="true" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="55" />
             </state>
           </provider>
         </entry>
@@ -80,8 +81,8 @@
         <option value="$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forcasting_service.bal" />
         <option value="$PROJECT_DIR$/redis_response_caching/guide/tests/weather_forecasting_backend_test.bal" />
         <option value="$PROJECT_DIR$/redis_response_caching/guide/tests/weather_forecasting_service_test.bal" />
-        <option value="$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_backend.bal" />
         <option value="$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_service.bal" />
+        <option value="$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_backend.bal" />
       </list>
     </option>
   </component>
@@ -212,6 +213,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="83" y="25" width="1837" height="1055" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -257,7 +259,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="BallerinaLineBreakpoint">
           <url>file://$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_service.bal</url>
-          <line>26</line>
+          <line>24</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
@@ -509,15 +511,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_backend.bal">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="16" selection-start-line="4" selection-end-line="4" selection-end-column="16" />
+        <state relative-caret-position="330">
+          <caret line="22" column="1" lean-forward="true" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_service.bal">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="16" column="17" selection-start-line="16" selection-end-line="16" selection-end-column="17" />
+        <state relative-caret-position="-13">
+          <caret line="19" column="55" lean-forward="true" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="55" />
         </state>
       </provider>
     </entry>
