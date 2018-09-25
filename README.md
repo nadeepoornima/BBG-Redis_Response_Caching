@@ -554,7 +554,7 @@ Start Kibana plugin for data visualization with Elasticsearch.
 
 <pre>
  $ docker run -p 5601:5601 -h kibana --name kibana --link \
-   elasticsearch:elasticsearch docker.elastic.co/kibana/kibana:6.2.2  
+   elasticsearch:elasticsearch docker.elastic.co/kibana/kibana:6.2.2
 </pre>
 
 * Configure logstash to format the Ballerina logs.
@@ -586,6 +586,7 @@ output {
 </pre>
 
 2. Save the above <code>logstash.conf</code> inside a directory named as <code>{SAMPLE_ROOT}\pipeline<code>.
+
 3. Start the logstash container, replace the <code>{SAMPLE_ROOT}</code> with your directory name.
 
 <pre>
