@@ -422,7 +422,7 @@ enabled=true
 </pre>
 
 <blockquote>
-NOTE: The above configuration is the minimum configuration needed to enable tracing and metrics. With these configurations, default values are loaded as the other configuration parameters of metrics and tracing.
+<p><strong>NOTE</strong>: The above configuration is the minimum configuration needed to enable tracing and metrics. With these configurations, default values are loaded as the other configuration parameters of metrics and tracing.</p>
 </blockquote>
 
 ### Tracing
@@ -470,6 +470,63 @@ http://localhost:16686
 </pre>
 
 ### Metrics
+
+Metrics and alerts are built-in with Ballerina. We will use Prometheus as the monitoring tool. Follow the steps below to set up Prometheus and view metrics for 'redis reponse caching'.
+
+You can add the following configurations for metrics. Note that these configurations are optional if you already have the basic configuration in <code>ballerina.conf</code> as described under the <code>Observability</code> section.
+
+<pre>
+[b7a.observability.metrics]
+   enabled=true
+   provider="micrometer"
+
+   [b7a.observability.metrics.micrometer]
+   registry.name="prometheus"
+
+   [b7a.observability.metrics.prometheus]
+   port=9700
+   hostname="0.0.0.0"
+   descriptions=false
+   step="PT1M"
+</pre>
+
+Create a file <code>prometheus.yml</code> inside the <code>/tmp/</code> location. Add the below configurations to the <code>prometheus.yml</code> file.
+
+<pre>
+global:
+     scrape_interval:     15s
+     evaluation_interval: 15s
+
+   scrape_configs:
+     - job_name: prometheus
+       static_configs:
+         - targets: ['172.17.0.1:9797']
+</pre>
+
+<blockquote>
+<p><strong>NOTE</strong>: Replace <code>172.17.0.1</code> if your local Docker IP differs from <code>172.17.0.1</code></p>
+</blockquote>
+
+Run the Prometheus docker image using the following command.
+
+<pre>
+$ docker run -p 19090:9090 -v /tmp/prometheus.yml:/etc/prometheus/prometheus.yml \
+   prom/prometheus
+</pre>
+
+You can access Prometheus at the following URL.
+
+<pre>
+http://localhost:19090/
+</pre>
+
+<blockquote>
+<p><strong>NOTE</strong>:  By default, Ballerina has the following metrics for HTTP server connector. You can enter the following expression in Prometheus UI.</p>
+<ul>
+<li>http_requests_total</li>
+<li>http_response_time</li>
+</ul>
+</blockquote>
 
 ### Logging
 
