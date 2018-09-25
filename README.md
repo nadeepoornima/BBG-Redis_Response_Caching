@@ -49,9 +49,6 @@ The high level picture of this response caching is as follows.
 4. Get the result from redis cache instead of calling to the backend again
 5. If cache expired, call back to the BE and response will cache again
 
-
-
-
 ## PREREQUISITES	
 
 1. <a href="https://ballerina.io/learn/getting-started/">Ballerina Distribution</a>
@@ -559,6 +556,46 @@ Start Kibana plugin for data visualization with Elasticsearch.
  $ docker run -p 5601:5601 -h kibana --name kibana --link \
    elasticsearch:elasticsearch docker.elastic.co/kibana/kibana:6.2.2  
 </pre>
+
+* Configure logstash to format the Ballerina logs.
+
+1. Create a file named <code>logstash.conf</code> with the following content.
+
+<pre>
+input {
+ beats{ 
+     port => 5044 
+ }  ]
+}
+
+filter {
+ grok{
+     match => { 
+     "message" => "%{TIMESTAMP_ISO8601:date}%{SPACE}%{WORD:logLevel}%{SPACE}
+     \[%{GREEDYDATA:package}\]%{SPACE}\-%{SPACE}%{GREEDYDATA:logMessage}"
+     }
+ } 
+}
+output { 
+ elasticsearch{ 
+     hosts => "elasticsearch:9200" 
+     index => "store" 
+     document_type => "store_logs" 
+ } 
+} 
+</pre>
+
+2. Save the above <code>logstash.conf</code> inside a directory named as <code>{SAMPLE_ROOT}\pipeline<code>.
+3. Start the logstash container, replace the <code>{SAMPLE_ROOT}</code> with your directory name.
+
+<pre>
+$ docker run -h logstash --name logstash --link elasticsearch:elasticsearch \
+-it --rm -v ~/{SAMPLE_ROOT}/pipeline:/usr/share/logstash/pipeline/ \
+-p 5044:5044 docker.elastic.co/logstash/logstash:6.2.2
+</pre>
+
+
+
 
 
 
