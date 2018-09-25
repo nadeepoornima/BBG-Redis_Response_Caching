@@ -409,7 +409,7 @@ You can run the service that we developed above, on Kubernetes. The Ballerina la
 
 Ballerina is by default observable. Meaning you can easily observe your services, resources, etc. Refer to <a href="https://ballerina.io/learn/how-to-observe-ballerina-code/">how-to-observe-ballerina-code</a> for more information. However, observability is disabled by default via configuration. Observability can be enabled by adding the following configurations to <code>ballerina.conf</code> file and then the Ballerina service will start to use it.
 
-<code>
+<pre>
 [b7a.observability]
 
 [b7a.observability.metrics]
@@ -419,7 +419,7 @@ enabled=true
 [b7a.observability.tracing]
 # Flag to enable Tracing
 enabled=true
-</code>
+</pre>
 
 <blockquote>
 NOTE: The above configuration is the minimum configuration needed to enable tracing and metrics. With these configurations, default values are loaded as the other configuration parameters of metrics and tracing.
@@ -433,7 +433,7 @@ Follow the steps below to use tracing with Ballerina.
 
 You can add the following configurations for tracing. Note that these configurations are optional if you already have the basic configuration in <code>ballerina.conf</code> as described above.
 
-<code>
+<pre>
 [b7a.observability]
 
    [b7a.observability.tracing]
@@ -448,26 +448,26 @@ You can add the following configurations for tracing. Note that these configurat
    reporter.flush.interval.ms=2000
    reporter.log.spans=true
    reporter.max.buffer.spans=1000
-</code>
+</pre>
 
 Run the Jaeger Docker image using the following command.
 
-<code>
+<pre>
    $ docker run -d -p5775:5775/udp -p6831:6831/udp -p6832:6832/udp -p5778:5778 \
    -p16686:16686 -p14268:14268 jaegertracing/all-in-one:latest
-</code>
+</pre>
 
 Navigate to BBG-Redis_Response_Caching/redis_response_caching/guide and *run* the response_caching using following command.
 
-<code>
+<pre>
 $ ballerina run response_caching/
-</code>
+</pre>
 
 Observe the tracing using Jaeger UI using the following URL.
 
-<code>
+<pre>
 http://localhost:16686
-</code>
+</pre>
 
 ### Metrics
 
