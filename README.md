@@ -530,6 +530,38 @@ http://localhost:19090/
 
 ### Logging
 
+Ballerina has a log package for logging into the console. You can import <code>ballerina/log</code> package and start logging. The following section describes how to search, analyze, and visualize logs in real time using Elastic Stack.
+
+Start the Ballerina service with the following command from <code>BBG-Redis_Response_Caching/redis_response_caching/guide</code>.
+
+<pre>
+$ nohup ballerina run response_caching/ &>> ballerina.log&
+</pre>
+
+<blockquote>
+<p><strong>NOTE</strong>: This writes the console log to the <code>ballerina.log</code> file in the <code>BBG-Redis_Response_Caching/redis_response_caching/guide</code> directory.</p>
+</blockquote>
+
+Start Elasticsearch using the following command.
+
+<pre>
+$ docker run -p 9200:9200 -p 9300:9300 -it -h elasticsearch --name \
+   elasticsearch docker.elastic.co/elasticsearch/elasticsearch:6.2.2 
+</pre>
+
+<blockquote>
+<p><strong>NOTE</strong>: Linux users might need to run <code>sudo sysctl -w vm.max_map_count=262144</code> to increase <code>vm.max_map_count</code>.</p>
+</blockquote>
+
+Start Kibana plugin for data visualization with Elasticsearch.
+
+<pre>
+ $ docker run -p 5601:5601 -h kibana --name kibana --link \
+   elasticsearch:elasticsearch docker.elastic.co/kibana/kibana:6.2.2  
+</pre>
+
+
+
 
 
 
