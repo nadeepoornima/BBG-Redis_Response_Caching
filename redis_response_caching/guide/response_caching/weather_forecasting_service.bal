@@ -1,23 +1,43 @@
 import ballerina/http;
 import ballerina/io;
 import wso2/redis;
+import ballerinax/docker;
 
 // Backend
+@docker:Expose{}
 endpoint http:Client backendEndpoint {
     url: "http://localhost:9095/weatherForecastingBackend"
 };
 //Service Listner
+@docker:Expose{}
 endpoint http:Listener Servicelistner  {
     port : 9100
 };
 
+@docker:CopyFiles {
+    files:[{source: "/home/nadee/Downloads/RedisBBG/wso2-redis-0.5.4.zip"
+        , target:"/home/nadee/Downloads/RedisBBG/Redis_service_conteianer"}]
+}
+
+// unzip and run installation script through shelscript
+
+// possibility to run shelscript through docker
 
 // Redis datasource used as an LRU cache
 endpoint redis:Client cache {
-    host: "localhost",
+    host: "test-host",
+    name: "some-rediss",
+    //host: "test-host",
     password: "",
     options: { ssl: false }
 };
+
+@docker:Config {
+    registry: "ballerina.guides.io",
+    name: "weather_forecasting_service",
+    tag: "v1.0",
+    baseImage: "ballerina/ballerina-platform:0.980.1"
+}
 
 service<http:Service> weatherForecastService bind Servicelistner {
 

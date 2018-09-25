@@ -403,6 +403,8 @@ You can run the service that we developed above as a Docker container. As Baller
 
 ### Deploying on Kubernetes
 
+You can run the service that we developed above, on Kubernetes. The Ballerina language offers native support for running a Ballerina program on Kubernetes, with the use of Kubernetes annotations that you can include as part of your service code. Also, it will take care of the creation of the docker images. So you don't need to explicitly create docker images prior to deploying it on Kubernetes. Refer to <a href="https://github.com/ballerinax/kubernetes">Ballerina_Kubernetes_Extension</a> for more details and samples on Kubernetes deployment with Ballerina. You can also find details on using Minikube to deploy Ballerina programs.
+
 ## OBSERVABILITY
 
 ### Tracing

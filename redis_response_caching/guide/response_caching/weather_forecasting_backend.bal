@@ -1,9 +1,22 @@
 import ballerina/io;
 import ballerina/http;
+import ballerinax/docker;
 
+@docker:Expose{}
 endpoint http:Listener listner  {
     port : 9095
 };
+
+@docker:Config {
+    registry: "ballerina.guides.io",
+    name: "weather_forecasting_service2",
+    tag: "v1.1",
+    baseImage: "ballerina/ballerina-platform:0.980.1"
+}
+
+//@docker:CopyFiles {
+//   files:[{source:"/home/nadee/Downloads/981/ballerina-platform-0.980.1/bre/lib/wso2-redis-package-0.5.4.jar", target:"/ballerina/runtime/bre/lib"}]
+//}
 
 service<http:Service> weatherForecastingBackend  bind listner {
 
