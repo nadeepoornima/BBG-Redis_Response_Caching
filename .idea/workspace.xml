@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="15e81439-8776-4447-badc-42094ed836a9" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_backend.bal" beforeDir="false" afterPath="$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_backend.bal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_service.bal" beforeDir="false" afterPath="$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_service.bal" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,7 +23,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="weather_forecasting_service_test.bal" pinned="false" current-in-tab="false">
+      <file leaf-file-name="weather_forecasting_service_test.bal" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/tests/weather_forecasting_service_test.bal">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
@@ -36,7 +36,7 @@
         <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_backend.bal">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="330">
-              <caret line="22" column="1" lean-forward="true" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+              <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -46,11 +46,11 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file leaf-file-name="weather_forecasting_service.bal" pinned="false" current-in-tab="true">
+      <file leaf-file-name="weather_forecasting_service.bal" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_service.bal">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-13">
-              <caret line="19" column="55" lean-forward="true" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="55" />
+            <state relative-caret-position="540">
+              <caret line="36" column="54" selection-start-line="36" selection-start-column="54" selection-end-line="36" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -81,8 +81,8 @@
         <option value="$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forcasting_service.bal" />
         <option value="$PROJECT_DIR$/redis_response_caching/guide/tests/weather_forecasting_backend_test.bal" />
         <option value="$PROJECT_DIR$/redis_response_caching/guide/tests/weather_forecasting_service_test.bal" />
-        <option value="$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_service.bal" />
         <option value="$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_backend.bal" />
+        <option value="$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_service.bal" />
       </list>
     </option>
   </component>
@@ -97,9 +97,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -137,6 +134,9 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -213,7 +213,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="83" y="25" width="1837" height="1055" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -224,10 +223,10 @@
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.32998884" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.32998884" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27359018" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27694026" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -267,6 +266,37 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/tests/weather_forecasting_backend_test.bal">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="1" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_backend.bal">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="1" lean-forward="true" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/response_caching/docker/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_service.bal">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" column="54" selection-start-line="36" selection-start-column="54" selection-end-line="36" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/tests/weather_forecasting_service_test.bal">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="50" selection-start-line="8" selection-start-column="50" selection-end-line="8" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/tests/weather_forecasting_backend_test.bal">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -492,13 +522,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/tests/weather_forecasting_service_test.bal">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="50" selection-start-line="8" selection-start-column="50" selection-end-line="8" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/tests/weather_forecasting_backend_test.bal">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -506,20 +529,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/response_caching/docker/Dockerfile">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_backend.bal">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
-          <caret line="22" column="1" lean-forward="true" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+          <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_service.bal">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-13">
-          <caret line="19" column="55" lean-forward="true" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="55" />
+        <state relative-caret-position="540">
+          <caret line="36" column="54" selection-start-line="36" selection-start-column="54" selection-end-line="36" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/response_caching/docker/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/tests/weather_forecasting_service_test.bal">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="50" selection-start-line="8" selection-start-column="50" selection-end-line="8" selection-end-column="50" />
         </state>
       </provider>
     </entry>

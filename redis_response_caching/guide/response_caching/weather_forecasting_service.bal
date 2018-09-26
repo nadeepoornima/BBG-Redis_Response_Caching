@@ -32,7 +32,9 @@ endpoint redis:Client cache {
 
 @docker:Config {
     registry: "ballerina.guides.io",
-    name: "weather_forecasting_service",
+    name: "weather_forecasting_service",$ docker run -h logstash --name logstash --link elasticsearch:elasticsearch \
+-it --rm -v ~/{SAMPLE_ROOT}/pipeline:/usr/share/logstash/pipeline/ \
+-p 5044:5044 docker.elastic.co/logstash/logstash:6.2.2
     tag: "v1.0",
     baseImage: "ballerina/ballerina-platform:0.980.1"
 }

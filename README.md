@@ -585,7 +585,7 @@ output {
 } 
 </pre>
 
-2. Save the above <code>logstash.conf</code> inside a directory named as <code>{SAMPLE_ROOT}\pipeline<code>.
+2. Save the above <code>logstash.conf</code> inside a directory named as <code>{SAMPLE_ROOT}\pipeline</code>.
 
 3. Start the logstash container, replace the <code>{SAMPLE_ROOT}</code> with your directory name.
 
@@ -594,6 +594,38 @@ $ docker run -h logstash --name logstash --link elasticsearch:elasticsearch \
 -it --rm -v ~/{SAMPLE_ROOT}/pipeline:/usr/share/logstash/pipeline/ \
 -p 5044:5044 docker.elastic.co/logstash/logstash:6.2.2
 </pre>
+
+* Configure filebeat to ship the Ballerina logs.
+
+1. Create a file named <code>filebeat.yml</code> with the following content.
+
+<pre>
+filebeat.prospectors:
+- type: log
+  paths:
+    - /usr/share/filebeat/ballerina.log
+output.logstash:
+  hosts: ["logstash:5044"] 
+</pre>
+
+<blockquote>
+<p><strong>NOTE</strong>: Modify the ownership of <code>filebeat.yml</code> file using <code>$chmod go-w filebeat.yml</code>.</p>
+</blockquote>
+
+2. Save the above <code>filebeat.yml</code> inside a directory named as <code>{SAMPLE_ROOT}\filebeat</code>.
+3. Start the logstash container, replace the <code>{SAMPLE_ROOT}</code> with your directory name.
+<pre>
+$ docker run -v {SAMPLE_ROOT}/filbeat/filebeat.yml:/usr/share/filebeat/filebeat.yml \
+-v {SAMPLE_ROOT}/guide/passthrough/ballerina.log:/usr/share\
+/filebeat/ballerina.log --link logstash:logstash docker.elastic.co/beats/filebeat:6.2.2
+</pre>
+Access Kibana to visualize the logs using the following URL.
+<pre>http://localhost:5601</pre>
+
+
+
+
+
 
 
 
