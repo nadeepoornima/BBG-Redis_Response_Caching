@@ -1,10 +1,10 @@
 # Auto Generated Dockerfile
 
-FROM ballerina/ballerina-platform:0.980.1
+FROM ballerina-redis:0.982.0
 LABEL maintainer="dev@ballerina.io"
 
-COPY weather_forecasting_backend.balx /home/ballerina 
+COPY weather_forecasting_service.balx /home/ballerina 
 
-EXPOSE  9095
+EXPOSE  9100
 
-CMD ballerina run weather_forecasting_backend.balx
+CMD ballerina run weather_forecasting_service.balx

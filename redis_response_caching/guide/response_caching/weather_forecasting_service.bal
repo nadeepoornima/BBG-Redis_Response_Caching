@@ -5,17 +5,18 @@ import ballerinax/docker;
 
 // Backend
 endpoint http:Client backendEndpoint {
-    url: "http://localhost:9095/weatherForecastingBackend"
+    url: "http://172.17.0.2:9096/weatherForecastingBackend"
 };
 //Service Listner
+@docker:Expose{}
 endpoint http:Listener Servicelistner  {
     port : 9100
 };
 
-@docker:CopyFiles {
-    files:[{source: "/home/nadee/Downloads/RedisBBG/wso2-redis-0.5.4.zip"
-        , target:"/home/nadee/Downloads/RedisBBG/Redis_service_conteianer"}]
-}
+//@docker:CopyFiles {
+//    files:[{source: "/home/nadee/Downloads/RedisBBG/wso2-redis-0.5.4.zip"
+//        , target:"/home/nadee/Downloads/RedisBBG/Redis_service_conteianer"}]
+//}
 
 // unzip and run installation script through shelscript
 
@@ -23,8 +24,8 @@ endpoint http:Listener Servicelistner  {
 
 // Redis datasource used as an LRU cache
 endpoint redis:Client cache {
-    host: "test-host",
-    name: "some-rediss",
+    host: "172.17.0.3",
+    //name: "some-rediss",
     //host: "test-host",
     password: "",
     options: { ssl: false }
@@ -32,11 +33,9 @@ endpoint redis:Client cache {
 
 @docker:Config {
     registry: "ballerina.guides.io",
-    name: "weather_forecasting_service",$ docker run -h logstash --name logstash --link elasticsearch:elasticsearch \
--it --rm -v ~/{SAMPLE_ROOT}/pipeline:/usr/share/logstash/pipeline/ \
--p 5044:5044 docker.elastic.co/logstash/logstash:6.2.2
+    name: "weather_forecasting_service",
     tag: "v1.0",
-    baseImage: "ballerina/ballerina-platform:0.980.1"
+    baseImage: "ballerina-redis:0.982.0"
 }
 
 service<http:Service> weatherForecastService bind Servicelistner {
