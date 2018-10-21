@@ -1,42 +1,10 @@
 import ballerina/io;
 import ballerina/http;
-//import ballerinax/docker;
-import ballerinax/kubernetes;
 
-
-@kubernetes:Ingress {
-    hostname:"ballerina.guides.io",
-    name:"weatherForecastingBackend",
-    path:"/"
-}
-
-@kubernetes:Service {
-    serviceType:"NodePort",
-    name:"contentfilter"
-}
-@kubernetes:Service {
-    serviceType:"NodePort",
-    name:"validate"
-}
-@kubernetes:Service {
-    serviceType:"NodePort",
-    name:"enricher"
-}
-@kubernetes:Service {
-    serviceType:"NodePort",
-    name:"backend"
-}
-//@docker:Expose {}
 endpoint http:Listener listner {
     port: 9096
 };
 
-@kubernetes:Deployment {
-    image:"weather_forecasting_backend",
-    name:"weather_forecasting_backend_two",
-    baseImage:"ballerina/ballerina-platform:0.982.0"
-}
-//@docker:Config{}
 service<http:Service> weatherForecastingBackend bind listner {
 
     getDailyForcast(endpoint caller, http:Request req) {

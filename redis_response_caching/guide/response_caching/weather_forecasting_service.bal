@@ -1,73 +1,23 @@
 import ballerina/http;
 import ballerina/io;
 import wso2/redis;
-//import ballerinax/docker;
-import ballerinax/kubernetes;
-
 
 // Backend
 endpoint http:Client backendEndpoint {
-    url: "http://172.17.0.2:9096/weatherForecastingBackend"
+    url: "http://localhost:9096/weatherForecastingBackend"
 };
 
-@kubernetes:Ingress {
-    hostname:"ballerina.guides.io",
-    name:"weatherForecastingBackend",
-    path:"/"
-}
-
-@kubernetes:Service {
-    serviceType:"NodePort",
-    name:"contentfilter"
-}
-@kubernetes:Service {
-    serviceType:"NodePort",
-    name:"validate"
-}
-@kubernetes:Service {
-    serviceType:"NodePort",
-    name:"enricher"
-}
-@kubernetes:Service {
-    serviceType:"NodePort",
-    name:"backend"
-}
 //Service Listner
-//@docker:Expose{}
 endpoint http:Listener Servicelistner  {
     port : 9100
 };
 
-//@docker:CopyFiles {
-//    files:[{source: "/home/nadee/Downloads/RedisBBG/wso2-redis-0.5.4.zip"
-//        , target:"/home/nadee/Downloads/RedisBBG/Redis_service_conteianer"}]
-//}
-
-// unzip and run installation script through shelscript
-
-// possibility to run shelscript through docker
-
 // Redis datasource used as an LRU cache
 endpoint redis:Client cache {
-    host: "172.17.0.3",
-    //name: "some-rediss",
-    //host: "test-host",
+    host: "localhost",
     password: "",
     options: { ssl: false }
 };
-
-//@docker:Config {
-//    registry: "ballerina.guides.io",
-//    name: "weather_forecasting_service",
-//    tag: "v1.0",
-//    baseImage: "ballerina/ballerina-redis:0.982.0"
-//}
-
-@kubernetes:Deployment {
-    image:"ballerina.guides.io/weather_forecasting_service",
-    name:"weather_forecasting_service",
-    baseImage:"ballerina/ballerina-platform:0.982.0"
-}
 
 service<http:Service> weatherForecastService bind Servicelistner {
 
