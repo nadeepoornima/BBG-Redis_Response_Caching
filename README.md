@@ -590,6 +590,283 @@ Generating executable
 
 You can run the service that we developed above, on Kubernetes. The Ballerina language offers native support for running a Ballerina program on Kubernetes, with the use of Kubernetes annotations that you can include as part of your service code. Also, it will take care of the creation of the docker images. So you don't need to explicitly create docker images prior to deploying it on Kubernetes. Refer to <a href="https://github.com/ballerinax/kubernetes">Ballerina_Kubernetes_Extension</a> for more details and samples on Kubernetes deployment with Ballerina. You can also find details on using Minikube to deploy Ballerina programs.
 
+Since this guide requires Redis as a prerequisite, you need a couple of more steps to create a Redis pod and use it with our sample.
+
+- First, let's look at how we can create a Redis pod in Kubernetes. If you are working with minikube, it will be convenient to use the minikube's in-built docker daemon and push the Redis docker image we are about to build to the minikube's docker registry. This is because during the next steps, in the case of minikube, the docker images we build for weather_backend and weather_service will also be pushed to minikube's docker registry. Having both images in the same registry will reduce the configuration steps. Run the following command to start using minikube's in-built docker daemon.
+
+<pre>minikube docker-env</pre>
+
+-  
+Then run the following command from the same directory to create the Redis pod by creating a deployment and service for Redis. You can find the deployment descriptor and service descriptor in the *./resources/kubernetes* folder.
+
+<pre>$kubectl create -f ./kubernetes/</pre>
+
+- Now we need to import ballerinax/kubernetes; and use @kubernetes annotations as shown below to enable Kubernetes deployment for the services we developed above.
+
+**Weather_forecasting_backend.bal**
+
+```java
+import ballerina/io;
+import ballerina/http;
+import ballerinax/kubernetes;
+ 
+ 
+@kubernetes:Ingress {
+   hostname:"ballerina.guides.io",
+   name:"weatherForecastingBackend",
+   path:"/"
+}
+ 
+@kubernetes:Service {
+   serviceType:"NodePort",
+   name:"contentfilter"
+}
+@kubernetes:Service {
+   serviceType:"NodePort",
+   name:"validate"
+}
+@kubernetes:Service {
+   serviceType:"NodePort",
+   name:"enricher"
+}
+@kubernetes:Service {
+   serviceType:"NodePort",
+   name:"backend"
+}
+//@docker:Expose {}
+endpoint http:Listener listner {
+   port: 9096
+};
+ 
+@kubernetes:Deployment {
+   image:"weather_forecasting_backend",
+   name:"weather_forecasting_backend",
+   baseImage:"ballerina/ballerina-platform:0.982.0"
+}
+//@docker:Config{}
+service<http:Service> weatherForecastingBackend bind listner {
+ 
+   getDailyForcast(endpoint caller, http:Request req) {
+       http:Response res = new;
+       json response = { "Location": "Sri Lanka",
+           "Status": "Thunderstorm",
+           "Temperature": "29 celcius",
+           "Wind": "18 km/h",
+           "Humidity": "86%",
+           "Precipitation": "80%" };
+       res.setPayload(response);
+ 
+       caller->respond(res) but { error e => io:println("Error sending response") };
+   }
+}
+
+``` 
+
+- Here we have used *@kubernetes:Deployment* to specify the docker image name which will be created as part of building this service.
+- Please note that if you are using minikube it is required to add the dockerHost and dockerCertPath configurations under *@kubernetes:Deployment*. Eg:
+
+<pre>
+@kubernetes:Deployment {
+    @kubernetes:Deployment {
+   image:"weather_forecasting_backend",
+   name:"ballerina-guides-weather-forcasting-backend",
+   baseImage:"ballerina/ballerina-platform:0.982.0"
+    dockerHost:"tcp://<MINIKUBE_IP>:<DOCKER_PORT>",
+    dockerCertPath:"<MINIKUBE_CERT_PATH>"
+}
+</pre>
+
+- We have also specified *@kubernetes:Service* so that it will create a Kubernetes service which will expose the Ballerina service that is running on a Pod.
+- In addition, we have used *@kubernetes:Ingress* which is the external interface to access your service (with path / and hostname ballerina.guides.io).
+- Now you can build a Ballerina executable archive (.balx) of the service that we developed above, using the following command. It points to the service file that we developed above and it will create an executable binary out of that. This will also create the corresponding docker image and the Kubernetes artifacts using the Kubernetes annotations that you have configured above.
+
+<pre>
+ballerina build weather_forecasting_backend.bal
+ 
+Compiling source
+    weather_forecasting_backend.bal
+ 
+Generating executable
+    weather_forecasting_backend.balx
+        @kubernetes:Service                      - complete 1/1
+        @kubernetes:Ingress                      - complete 1/1
+        @kubernetes:Deployment                   - complete 1/1
+        @kubernetes:Docker                       - complete 3/3
+ 
+ Run following command to deploy kubernetes artifacts: 
+           kubectl apply -f ./target/weather_forecasting_backend/kubernetes/
+</pre>
+
+- You can verify that the docker image that we specified in *@kubernetes:Deployment* is created, by using docker images.
+- Also the Kubernetes artifacts related our service, will be generated in *./target/weather_forecasting_backend/kubernetes*.
+- Now you can create the Kubernetes deployment using:
+<pre>$kubectl apply -f ./target/weather_forecasting_backend/kubernetes</pre>
+- You can verify if Kubernetes deployment, service and ingress are running properly by using following Kubernetes commands.
+<pre>
+   $kubectl get service
+   $kubectl get deploy
+   $kubectl get pods
+   $kubectl get ingress
+</pre>
+- If everything is successfully deployed, you can invoke the service either via Node port or ingress.
+**Node Port:**
+<pre>curl -v http://localhost:9096/weatherForecastingBackend/getDailyForcast</pre>
+**Ingress:**
+Add */etc/hosts* entry to match hostname.
+<pre>127.0.0.1 ballerina.guides.io</pre>
+ 
+**Access the service**
+<pre>curl -v http://localhost:9096/weatherForecastingBackend/getDailyForcast</pre>
+
+**Weather_forecasting_service.bal**
+
+```java
+import ballerina/http;
+import ballerina/io;
+import wso2/redis;
+import ballerinax/kubernetes;
+
+
+// Backend
+endpoint http:Client backendEndpoint {
+   url: "http://172.17.0.2:9096/weatherForecastingBackend"
+};
+
+@kubernetes:Ingress {
+   hostname:"ballerina.guides.io",
+   name:"weatherForecastingService",
+   path:"/"
+}
+
+@kubernetes:Service {
+   serviceType:"NodePort",
+   name:"contentfilter"
+}
+@kubernetes:Service {
+   serviceType:"NodePort",
+   name:"validate"
+}
+@kubernetes:Service {
+   serviceType:"NodePort",
+   name:"enricher"
+}
+@kubernetes:Service {
+   serviceType:"NodePort",
+   name:"backend"
+}
+//Service Listner
+endpoint http:Listener Servicelistner  {
+   port : 9100
+};
+
+
+endpoint redis:Client cache {
+   host: "172.17.0.3",
+   password: "",
+   options: { ssl: false }
+};
+
+@kubernetes:Deployment {
+   image:"ballerina.guides.io/weather_forecasting_service",
+   name:"weather_forecasting_service",
+   baseImage:"ballerina/ballerina-platform:0.982.0"
+}
+
+service<http:Service> weatherForecastService bind Servicelistner {
+
+   getWeatherForecast(endpoint caller, http:Request req) {
+       http:Response res = new;
+
+       // First check whether the response is already cached
+       var cachedResponse = cache->get("key");
+
+       match cachedResponse {
+           // If the response is cached set it as the payload
+           string result => {
+               io:println("Found in cache! " + result);
+               res.setPayload(<json>result);
+           }
+           // If response is not cached, call the backend and get the result and cache it
+           () => {
+               io:println("Not Found in cache Called to Backend and cache the response");
+               var backendResponse = backendEndpoint->get("/getDailyForcast");
+               res = handleBackendResponse(backendResponse);
+
+           }
+           error => {
+               res.setPayload({ message: "Error occurred" });
+           }
+       }
+
+       // Respond to the client
+       caller->respond(res) but {
+           error e => io:println("Error sending response")
+       };
+   }
+}
+
+function handleBackendResponse(http:Response|error backendResponse) returns http:Response {
+   http:Response res = new;
+   match backendResponse {
+       http:Response backendRes => {
+           res = backendRes;
+           var jsonPayload = res.getJsonPayload();
+           match jsonPayload {
+               json j => {
+                   // Cache the response
+                   _ = cache->setVal("key", j.toString());
+                   // Set an expiry time for the cache
+                   _ = cache->pExpire("key", 600000);
+               }
+               error e => {
+                   io:println("Error while updating the cache" + e.message);
+               }
+           }
+       }
+       error => {
+           res.setPayload({ message: "Error occurred" });
+       }
+   }
+   return res;
+}
+```
+- Now you can build a Ballerina executable archive (.balx) of the service that we developed above, using the following command. It points to the service file that we developed above and it will create an executable binary out of that. This will also create the corresponding docker image and the Kubernetes artifacts using the Kubernetes annotations that you have configured above.
+<pre>
+ballerina build weather_forecasting_service.bal
+compiling source
+    weather_forecasting_service.bal
+        could not find package wso2/redis:*
+ 
+Generating executable
+    weather_forecasting_service.balx
+        @kubernetes:Service                      - complete 1/1
+        @kubernetes:Ingress                      - complete 1/1
+        @kubernetes:Deployment                   - complete 1/1
+       @kubernetes:Docker                       - complete 3/3
+ Run following command to deploy kubernetes artifacts: 
+           kubectl apply -f ./target/weather_forecasting_service/kubernetes/
+</pre>
+
+- You can verify that the docker image that we specified in *@kubernetes:Deployment* is created, by using docker images.
+- Also the Kubernetes artifacts related our service, will be generated in ./target/weather_forecasting_service/kubernetes.
+- Now you can create the Kubernetes deployment using:
+<pre>$kubectl apply -f ./target/weather_forecasting_service/kubernetes </pre>
+- You can verify if Kubernetes deployment, service and ingress are running properly by using following Kubernetes commands.
+<pre>
+   $kubectl get service
+   $kubectl get deploy
+   $kubectl get pods
+   $kubectl get ingress
+</pre>
+- If everything is successfully deployed, you can invoke the service either via Node port or ingress.
+**Node Port:**
+<pre>curl -v http://localhost:9100/weatherForecastService/getWeatherForecast</pre>
+**Ingress:**
+Add */etc/hosts entry* to match hostname.
+<pre>127.0.0.1 ballerina.guides.io</pre>
+**Access the service**
+<pre>curl -v http://localhost:9100/weatherForecastService/getWeatherForecast</pre>
+
 ## OBSERVABILITY
 
 Ballerina is by default observable. Meaning you can easily observe your services, resources, etc. Refer to <a href="https://ballerina.io/learn/how-to-observe-ballerina-code/">how-to-observe-ballerina-code</a> for more information. However, observability is disabled by default via configuration. Observability can be enabled by adding the following configurations to <code>ballerina.conf</code> file and then the Ballerina service will start to use it.

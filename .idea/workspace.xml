@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="15e81439-8776-4447-badc-42094ed836a9" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/redis_response_caching/Docker/install.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redis_response_caching/guide/response_caching/docker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/redis_response_caching/guide/response_caching/docker/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redis_response_caching/Docker/install.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_backend.bal" beforeDir="false" afterPath="$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_backend.bal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_backend.balx" beforeDir="false" afterPath="$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_backend.balx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_service.bal" beforeDir="false" afterPath="$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_service.bal" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_service.balx" beforeDir="false" afterPath="$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_service.balx" afterDir="false" />
     </list>
@@ -21,7 +22,7 @@
         <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/tests/weather_forecasting_backend_test.bal">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="270">
-              <caret line="18" column="1" lean-forward="true" selection-end-line="18" selection-end-column="1" />
+              <caret line="18" column="1" selection-end-line="18" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -38,8 +39,8 @@
       <file leaf-file-name="weather_forecasting_backend.bal" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_backend.bal">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
+            <state relative-caret-position="255">
+              <caret line="35" column="41" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -47,8 +48,8 @@
       <file leaf-file-name="weather_forecasting_service.bal" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_service.bal">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-613">
-              <caret line="25" column="29" lean-forward="true" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+            <state relative-caret-position="270">
+              <caret line="18" column="21" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -63,15 +64,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
               <caret line="4" selection-start-line="4" selection-end-line="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="install.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/redis_response_caching/Docker/install.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="3" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -139,12 +131,6 @@
               <item name="BBG-Redis_Response_Caching" type="b2602c69:ProjectViewProjectNode" />
               <item name="BBG-Redis_Response_Caching" type="462c0819:PsiDirectoryNode" />
               <item name="redis_response_caching" type="462c0819:PsiDirectoryNode" />
-              <item name="Docker" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BBG-Redis_Response_Caching" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BBG-Redis_Response_Caching" type="462c0819:PsiDirectoryNode" />
-              <item name="redis_response_caching" type="462c0819:PsiDirectoryNode" />
               <item name="guide" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -171,7 +157,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="Empty file" value="Ballerina Main" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../RedisBBG/DockerConnector/docker" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Kubernates982/kubernetes/pom.xml" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
@@ -294,7 +280,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="BallerinaLineBreakpoint">
           <url>file://$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_service.bal</url>
-          <line>24</line>
+          <line>49</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
@@ -593,10 +579,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_service.bal">
+    <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/tests/weather_forecasting_backend_test.bal">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-613">
-          <caret line="25" column="29" lean-forward="true" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+        <state relative-caret-position="270">
+          <caret line="18" column="1" selection-end-line="18" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -607,17 +593,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/tests/weather_forecasting_backend_test.bal">
+    <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_service.bal">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
-          <caret line="18" column="1" lean-forward="true" selection-end-line="18" selection-end-column="1" />
+          <caret line="18" column="21" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/redis_response_caching/guide/response_caching/weather_forecasting_backend.bal">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
+        <state relative-caret-position="255">
+          <caret line="35" column="41" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="41" />
         </state>
       </provider>
     </entry>

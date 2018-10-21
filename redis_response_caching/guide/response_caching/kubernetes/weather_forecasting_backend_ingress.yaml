@@ -1,0 +1,22 @@
+---
+apiVersion: "extensions/v1beta1"
+kind: "Ingress"
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-passthrough: "false"
+    kubernetes.io/ingress.class: "nginx"
+  finalizers: []
+  labels:
+    app: "weather_forecasting_backend"
+  name: "weatherforecastingbackend"
+  ownerReferences: []
+spec:
+  rules:
+  - host: "ballerina.guides.io"
+    http:
+      paths:
+      - backend:
+          serviceName: "backend"
+          servicePort: 9096
+        path: "/"
+  tls: []
