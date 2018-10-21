@@ -35,7 +35,7 @@ endpoint redis:Client cache {
     registry: "ballerina.guides.io",
     name: "weather_forecasting_service",
     tag: "v1.0",
-    baseImage: "ballerina-redis:0.982.0"
+    baseImage: "ballerina/ballerina-redis:0.982.0"
 }
 
 service<http:Service> weatherForecastService bind Servicelistner {

@@ -104,7 +104,7 @@ import wso2/redis;
 
 // Backend
 endpoint http:Client backendEndpoint {
-    url: "http://localhost:9095/weatherForecastingBackend"
+    url: "http://localhost:9096/weatherForecastingBackend"
 };
 //Service Listner
 endpoint http:Listener Servicelistner  {
@@ -253,7 +253,7 @@ import ballerina/io;
 import ballerina/http;
 
 endpoint http:Listener listner  {
-    port : 9095
+    port : 9096
 };
 
 service<http:Service> weatherForecastingBackend  bind listner {
@@ -289,12 +289,12 @@ If correctly up the backend service, it will show the following message on the t
 <pre>
 <code>
 ballerina: initiating service(s) in 'weather_forecasting_backend.bal'
-ballerina: started HTTP/WS endpoint 0.0.0.0:9095
+ballerina: started HTTP/WS endpoint 0.0.0.0:9096
 </code>
 </pre>
 Now you can invoke the backend by sending the request as the below:
 <pre>
-<code>curl -v http://localhost:9095/weatherForecastingBackend/getDailyForcast</code>
+<code>curl -v http://localhost:9096/weatherForecastingBackend/getDailyForcast</code>
 </pre>
 The expected response for the above request is,
 <pre>
@@ -382,7 +382,7 @@ To run the unit tests, navigate to *BBG-Redis_Response_Caching/redis_response_ca
 <code>$ballerina run target/weather_forecasting_backend.balx</code>
 <code>
 ballerina: initiating service(s) in 'weather_forecasting_backend.bal'
-ballerina: started HTTP/WS endpoint 0.0.0.0:9095
+ballerina: started HTTP/WS endpoint 0.0.0.0:9096
 </code>
 </pre>
 
@@ -398,9 +398,198 @@ ballerina: started HTTP/WS endpoint 0.0.0.0:9100
 
 You can run the service that we developed above as a Docker container. As Ballerina platform includes <a href="https://github.com/ballerinax/docker">Ballerina_Docker_Extension</a>, which offers native support for running Ballerina programs on containers, you just need to put the corresponding docker annotations on your service code. Since this guide requires Redis as a prerequisite and you can download the Redis docker image from <a href="https://hub.docker.com/_/redis/">here<a> and please follow guidlines and you can use it to deploy this project as a docker image.
 
+
 ### Deploying on Kubernetes
 
 You can run the service that we developed above, on Kubernetes. The Ballerina language offers native support for running a Ballerina program on Kubernetes, with the use of Kubernetes annotations that you can include as part of your service code. Also, it will take care of the creation of the docker images. So you don't need to explicitly create docker images prior to deploying it on Kubernetes. Refer to <a href="https://github.com/ballerinax/kubernetes">Ballerina_Kubernetes_Extension</a> for more details and samples on Kubernetes deployment with Ballerina. You can also find details on using Minikube to deploy Ballerina programs.
+
+**First, let's see how to configure Redis in the Docker container.**
+
+- Initially, you need to pull the Redis docker image using the below command.
+<pre>$ docker pull redis</pre>
+- Then run the following command to start the redis instance.
+<pre>$ docker run --name some-redis -d redis</pre> 
+- Check whether the redis container is up and running using the following command.
+<pre>$docker ps</pre>
+
+**Let's create the docker containers for weather forecasting service and sample backend as follows.**
+
+As our implementation we need to create the backend service docker image first and need to create the weather service image as second one. Let's see how to do that.
+
+- First add the required docker annotations in our weather_forecasting_backend. You need to import ballerinax/docker; and add the docker annotations as shown below to enable docker image generation during the build time. 
+-  *@docker:Config* annotation is used to provide the basic docker image configurations for the sample. *@docker:Expose {}* is used to expose the port. 
+
+```java
+import ballerina/io;
+import ballerina/http;
+import ballerinax/docker;
+//import ballerinax/kubernetes;
+
+@docker:Expose {}
+endpoint http:Listener listner {
+   port: 9096
+};
+
+	
+@docker:Config{}
+service<http:Service> weatherForecastingBackend bind listner {
+
+   getDailyForcast(endpoint caller, http:Request req) {
+       http:Response res = new;
+       json response = { "Location": "Sri Lanka",
+           "Status": "Thunderstorm",
+           "Temperature": "29 celcius",
+           "Wind": "18 km/h",
+           "Humidity": "86%",
+           "Precipitation": "80%" };
+       res.setPayload(response);
+
+       caller->respond(res) but { error e => io:println("Error sending response") };
+   }
+}
+
+```
+- After that you can build a Ballerina executable archive (.balx) of the backend service that we developed above, using the following command. It points to the service file that we developed above and it will create an executable binary out of that. This will also create the corresponding docker image using the docker annotations that you have configured above. Navigate to the *BBG-Redis_Response_Caching/redis_response_caching/guide/response_caching/* folder and run the following command.
+
+<pre>
+$ballerina build weather_forecasting_backend.bal
+
+Compiling source
+    weather_forecasting_backend.bal
+
+Generating executable
+    weather_forecasting_backend.balx
+        @docker                  - complete 3/3 
+
+        Run the following command to start a Docker container:
+        docker run -d -p 9096:9096 weather_forecasting_backend:latest
+</pre>
+
+- Once you successfully build the docker image of sample backend, you can run it with the docker run command that is shown in the previous step.
+<pre>$docker run -d -p 9096:9096 weather_forecasting_backend:latest</pre>
+- Here we run the docker image with flag -p <host_port>:<container_port> so that we use the host port 9096 and the container port 9096. Therefore you can access the service through the host port.
+- Verify docker container is running with the use of $ docker ps. The status of the docker container should be shown as 'Up'.
+- You can access the service using the same curl commands that we've used above.
+<pre>curl -v http://localhost:9096/weatherForecastingBackend/getDailyForcast</pre>
+
+- Then as the last step you need to add the required dcoker annotations for the *weather_forecasting_service* as the below code. In here you need to use the docker image of redis connector (ballerina/ballerina-redis:0.982.0) which we have created to build the docker image of this service in a successful manner. You need to select the version compatible image as you used ballerina version.
+
+```java
+import ballerina/http;
+import ballerina/io;
+import wso2/redis;
+import ballerinax/docker;
+
+// Backend
+endpoint http:Client backendEndpoint {
+   url: "http://172.17.0.2:9096/weatherForecastingBackend" //IP address need to chage as the backend docker iname 
+};
+//Service Listner
+@docker:Expose{}
+endpoint http:Listener Servicelistner  {
+   port : 9100
+};
+
+// Redis datasource used as an LRU cache
+endpoint redis:Client cache {
+   host: "172.17.0.3", //Host need to change as your redis docker image 
+   password: "",
+   options: { ssl: false }
+};
+
+@docker:Config {
+   registry: "ballerina.guides.io",
+   name: "weather_forecasting_service",
+   tag: "v1.0",
+   baseImage: "ballerina/ballerina-redis:0.982.0"
+}
+
+service<http:Service> weatherForecastService bind Servicelistner {
+
+   getWeatherForecast(endpoint caller, http:Request req) {
+       http:Response res = new;
+
+       // First check whether the response is already cached
+       var cachedResponse = cache->get("key");
+
+       match cachedResponse {
+           // If the response is cached set it as the payload
+           string result => {
+               io:println("Found in cache! " + result);
+               res.setPayload(<json>result);
+           }
+           // If response is not cached, call the backend and get the result and cache it
+           () => {
+               io:println("Not Found in cache Called to Backend and cache the response");
+               var backendResponse = backendEndpoint->get("/getDailyForcast");
+               res = handleBackendResponse(backendResponse);
+
+           }
+           error => {
+               res.setPayload({ message: "Error occurred" });
+           }
+       }
+
+       // Respond to the client
+       caller->respond(res) but {
+           error e => io:println("Error sending response")
+       };
+   }
+}
+
+function handleBackendResponse(http:Response|error backendResponse) returns http:Response {
+   http:Response res = new;
+   match backendResponse {
+       http:Response backendRes => {
+           res = backendRes;
+           var jsonPayload = res.getJsonPayload();
+           match jsonPayload {
+               json j => {
+                   // Cache the response
+                   _ = cache->setVal("key", j.toString());
+                   // Set an expiry time for the cache
+                   _ = cache->pExpire("key", 600000);
+               }
+               error e => {
+                   io:println("Error while updating the cache" + e.message);
+               }
+           }
+       }
+       error => {
+           res.setPayload({ message: "Error occurred" });
+       }
+   }
+   return res;
+}
+```
+- Furthermore, you need to change the host field in the *redis:Client endpoint* and *http:Client backendEndpoint* definition to the IP address of the redis container and the backend container respectively. You can obtain this IP address using the below command.
+<pre>$docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <Container_ID></pre>
+
+- Now you can build a Ballerina executable archive (.balx) of the weather service that we developed above, using the following command. It points to the service file that we developed above and it will create an executable binary out of that. This will also create the corresponding docker image using the docker annotations that you have configured above. Navigate to the *BBG-Redis_Response_Caching/redis_response_caching/guide/response_caching/* folder and run the following command.
+
+<pre>
+$ballerina build weather_forecasting_service.bal
+	
+	Compiling source
+    weather_forecasting_service.bal
+        could not find package wso2/redis:*
+
+Generating executable
+    weather_forecasting_service.balx
+        @docker                  - complete 3/3 
+
+        Run the following command to start a Docker container:
+        docker run -d -p 9100:9100 ballerina.guides.io/weather_forecasting_service:v1.0
+
+</pre>
+
+- Once you successfully build the docker image of sample backend, you can run it with the docker run command that is shown in the previous step.
+<pre>$docker run -d -p 9100:9100 ballerina.guides.io/weather_forecasting_service:v1.0</pre>
+
+- Here we run the docker image with flag -p <host_port>:<container_port> so that we use the host port 9100 and the container port 9100. Therefore you can access the service through the host port.
+- Verify docker container is running with the use of $ docker ps. The status of the docker container should be shown as 'Up'.
+-You can access the service using the same curl commands that we've used above.
+<pre>curl -v http://localhost:9100/weatherForecastService/getWeatherForecast</pre>
 
 ## OBSERVABILITY
 

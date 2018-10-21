@@ -1,6 +1,6 @@
 # Auto Generated Dockerfile
 
-FROM ballerina-redis:0.982.0
+FROM ballerina/ballerina-redis:0.982.0
 LABEL maintainer="dev@ballerina.io"
 
 COPY weather_forecasting_service.balx /home/ballerina 
