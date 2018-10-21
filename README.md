@@ -398,11 +398,6 @@ ballerina: started HTTP/WS endpoint 0.0.0.0:9100
 
 You can run the service that we developed above as a Docker container. As Ballerina platform includes <a href="https://github.com/ballerinax/docker">Ballerina_Docker_Extension</a>, which offers native support for running Ballerina programs on containers, you just need to put the corresponding docker annotations on your service code. Since this guide requires Redis as a prerequisite and you can download the Redis docker image from <a href="https://hub.docker.com/_/redis/">here<a> and please follow guidlines and you can use it to deploy this project as a docker image.
 
-
-### Deploying on Kubernetes
-
-You can run the service that we developed above, on Kubernetes. The Ballerina language offers native support for running a Ballerina program on Kubernetes, with the use of Kubernetes annotations that you can include as part of your service code. Also, it will take care of the creation of the docker images. So you don't need to explicitly create docker images prior to deploying it on Kubernetes. Refer to <a href="https://github.com/ballerinax/kubernetes">Ballerina_Kubernetes_Extension</a> for more details and samples on Kubernetes deployment with Ballerina. You can also find details on using Minikube to deploy Ballerina programs.
-
 **First, let's see how to configure Redis in the Docker container.**
 
 - Initially, you need to pull the Redis docker image using the below command.
@@ -590,6 +585,10 @@ Generating executable
 - Verify docker container is running with the use of $ docker ps. The status of the docker container should be shown as 'Up'.
 -You can access the service using the same curl commands that we've used above.
 <pre>curl -v http://localhost:9100/weatherForecastService/getWeatherForecast</pre>
+
+### Deploying on Kubernetes
+
+You can run the service that we developed above, on Kubernetes. The Ballerina language offers native support for running a Ballerina program on Kubernetes, with the use of Kubernetes annotations that you can include as part of your service code. Also, it will take care of the creation of the docker images. So you don't need to explicitly create docker images prior to deploying it on Kubernetes. Refer to <a href="https://github.com/ballerinax/kubernetes">Ballerina_Kubernetes_Extension</a> for more details and samples on Kubernetes deployment with Ballerina. You can also find details on using Minikube to deploy Ballerina programs.
 
 ## OBSERVABILITY
 
